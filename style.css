@@ -1,0 +1,574 @@
+:root { 
+    --gold: #ffd700; 
+    --marble: #f5f5f5; 
+    --neon: #00f2ff; 
+    --accent: #e94560;
+    --roman-red: #800000;
+}
+
+/* --- BASE STYLES --- */
+body { 
+    margin: 0; 
+    min-height: 100vh; 
+    transition: background 0.6s ease, color 0.4s ease; 
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- NAVIGATION BAR --- */
+#timeline {
+    display: flex; 
+    overflow-x: auto; 
+    background: #111; 
+    padding: 15px;
+    gap: 12px; 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    border-bottom: 2px solid #333;
+    scrollbar-width: thin;
+}
+
+#timeline button {
+    background: #222; 
+    color: #eee; 
+    border: 1px solid #444;
+    padding: 10px 18px; 
+    cursor: pointer; 
+    white-space: nowrap; 
+    border-radius: 25px;
+    transition: all 0.2s ease;
+}
+
+#timeline button:hover { 
+    background: #444; 
+    transform: translateY(-2px);
+    border-color: var(--gold);
+}
+
+/* --- MAIN CONTAINER --- */
+main { 
+    flex: 1;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 40px 20px; 
+}
+
+.card { 
+    max-width: 800px; 
+    width: 100%; 
+    padding: 40px; 
+    border-radius: 20px; 
+    text-align: center; 
+    box-shadow: 0 15px 45px rgba(0,0,0,0.4);
+    background: rgba(255,255,255,0.1); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- ERA SPECIFIC THEMES --- */
+
+/* Home */
+.home { background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%); color: #fff; }
+
+/* Stone Age */
+.stone-age {
+    background-image: url('https://www.transparenttextures.com/patterns/rocky-wall.png');
+    background-color: #1a0f0d;
+}
+.stone-age .card { border: 6px solid #3e2723; background: rgba(0,0,0,0.2); }
+
+.cave-shake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* The Fun Fact Appearance */
+.parchment-fact {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    background: #f4ece1; /* Parchment color */
+    color: #3e2723;
+    padding: 20px;
+    border: 3px solid #8d6e63;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.7), 5px 5px 15px rgba(0,0,0,0.3);
+    z-index: 100;
+    animation: fadeInStone 0.8s ease-out;
+    /* Roughedged look using a mask-like clip path */
+    clip-path: polygon(2% 0%, 98% 2%, 100% 98%, 0% 100%, 3% 50%);
+}
+
+.parchment-fact h3 {
+    margin-top: 0;
+    font-family: 'Georgia', serif;
+    border-bottom: 1px solid #8d6e63;
+}
+
+@keyframes fadeInStone {
+    from { opacity: 0; transform: translate(-50%, -40%) scale(0.9); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Background for Stone Age */
+.stone-age {
+    background: radial-gradient(circle, #3e2723 0%, #1a0f0d 100%);
+}
+
+/* Mesopotamia */
+
+#hanging-gardens {
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 10px;
+}
+
+#clay-tablet {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.05s;
+    cursor: crosshair; /* Or a custom stylus image if you have one */
+}
+
+#clay-tablet:active {
+    transform: scale(0.98);
+}
+
+@keyframes grow {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.mesopotamia {
+    /* A gradient representing the desert sun hitting the sand and water */
+    background: linear-gradient(180deg, #3f51b5 0%, #ffab91 40%, #d7ccc8 100%);
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+.mesopotamia .card {
+    background: rgba(255, 252, 242, 0.9) !important; /* Papyrus/Clay colored card */
+    border: 10px double #003366 !important; /* Deep Blue Lapis Lazuli */
+    box-shadow: 0 0 20px rgba(0, 51, 102, 0.5);
+    color: #4e342e !important;
+}
+
+.mesopotamia::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0.05;
+    pointer-events: none;
+    background-image: url('https://www.transparenttextures.com/patterns/sandpaper.png');
+}
+
+/* Roman Empire */
+.roman-empire { background: var(--marble); color: var(--roman-red); font-family: 'Cinzel Decorative', serif; }
+.roman-empire .card { border: 2px solid var(--roman-red); }
+
+/* --- ROMAN GATE GAME VISUALS --- */
+
+#visual-gate-wrapper {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 20px auto;
+    background-color: #f4ece1; /* Inner gateway color */
+    border: 15px solid #a1887f; /* Outer stone color */
+    border-top-left-radius: 125px; /* Creates the Roman Arch */
+    border-top-right-radius: 125px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    overflow: hidden; /* Important: The gate moves outside the bounds */
+}
+
+/* The Stone Archway (Foreground mask) */
+.stone-arch {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* We don't need a mask if overflow:hidden is on the parent, 
+       but we could add stone textures here if needed. */
+}
+
+/* The Iron Portcullis (The moving grid) */
+.gate-grid {
+    position: absolute;
+    bottom: 0; /* Starts down */
+    left: 5%;
+    width: 90%;
+    height: 100%; /* Fully covers the opening */
+    background-color: transparent;
+    
+    /* CSS Grid Pattern: Draws a mesh using linear gradients */
+    background-image: 
+        linear-gradient(90deg, #333 10px, transparent 10px), /* Vertical bars */
+        linear-gradient(#333 10px, transparent 10px); /* Horizontal bars */
+    background-size: 40px 40px; /* Controls the grid spacing */
+    background-position: 15px 15px;
+    
+    border: 5px solid #222; /* Outside border of the iron gate */
+    border-bottom: none; /* Let it sit flush with the ground */
+    
+    transition: transform 0.1s linear; /* Smooth, but fast update on click */
+}
+
+/* TROJAN HORSE ANIMATION CLASS */
+.trojan-run {
+    display: block !important;
+    animation: trojanCharge 1.5s ease-out forwards;
+}
+
+@keyframes trojanCharge {
+    0% { left: -200px; opacity: 0; }
+    30% { opacity: 1; }
+    100% { left: 50%; transform: translateX(-50%); } /* Stop in the center */
+}
+
+
+/* Middle Ages */
+.middle-ages { background: #2c3e50; color: #ecf0f1; font-family: 'MedievalSharp', cursive; }
+
+/* Belle Epoque */
+.belle-epoque { background: #fdf5e6; color: #5d4037; font-family: 'Playfair Display', serif; }
+.belle-epoque .card { border: 12px solid #a1887f; background: rgba(255,255,255,0.7); }
+
+/* Roaring 20s */
+.roaring-20s { background: #000; color: var(--gold); }
+.roaring-20s .card { border: 4px solid var(--gold); border-style: double; background: rgba(20,20,20,0.9); }
+
+/* 1990s */
+.the-1990 { background: #008080; color: #000; font-family: 'Press Start 2P', cursive; }
+.the-1990 .card {
+    background: #c0c0c0 !important; /* Classic Windows Grey */
+    border: 4px outset #ffffff !important;
+    color: #000 !important;
+    font-family: 'Courier New', Courier, monospace;
+    box-shadow: 5px 5px 0px #000;
+}
+
+.the-1990 .game-btn {
+    background: #c0c0c0;
+    border: 2px outset #ffffff;
+    color: #000;
+    box-shadow: 1px 1px 0px #000;
+    font-weight: bold;
+    text-transform: none; /* Windows didn't use all-caps buttons */
+}
+
+.the-1990 .game-btn:active {
+    border: 2px inset #ffffff;
+    transform: translate(1px, 1px);
+}
+
+/* Add this to your style.css */
+.the-1990 #modem-status {
+    font-family: 'Courier New', Courier, monospace;
+    background: #000;
+    color: #0f0 !important; /* Matrix/Terminal green */
+    padding: 5px;
+    border: 2px inset #fff;
+    display: inline-block;
+    min-width: 250px;
+}
+
+.audio-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 2px solid #ffeeba;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Specific styling for the 1990s Windows version to match the theme */
+.the-1990 .audio-warning {
+    background: #ffffcc;
+    border: 2px inset #fff;
+    color: #000;
+    font-family: 'Courier New', monospace;
+}
+
+/* 2026 */
+.year-2026 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+.year-2026 .card { border-radius: 35px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); }
+
+/* Future */
+.future { background: #020205; color: var(--neon); font-family: 'Orbitron', sans-serif; }
+.future .card { border: 1px solid var(--neon); box-shadow: 0 0 15px var(--neon); }
+
+/* About Creator */
+.about-creator { background: #0f172a; color: var(--accent); }
+.about-creator .card { border-left: 8px solid var(--accent); text-align: left; }
+
+/* --- INTERACTIVE ELEMENTS --- */
+.the-1970 .game-area {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.game-btn { 
+    background: var(--gold); 
+    color: #000; 
+    border: none; 
+    padding: 12px 24px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    margin: 8px; 
+    border-radius: 6px;
+    text-transform: uppercase;
+    transition: transform 0.1s;
+}
+
+.game-btn:active { transform: scale(0.95); }
+
+/* Piano Keys Sinking Logic */
+.key { 
+    width: 45px; 
+    height: 130px; 
+    background: white; 
+    border: 2px solid #222; 
+    color: #222; 
+    display: flex; 
+    align-items: flex-end; 
+    justify-content: center; 
+    padding-bottom: 15px; 
+    font-weight: bold;
+    border-radius: 0 0 5px 5px;
+    cursor: pointer;
+    transition: transform 0.05s, background 0.1s, box-shadow 0.05s;
+    user-select: none;
+}
+
+.active-key {
+    background: #ffd700 !important;
+    transform: translateY(6px);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), inset 0 8px 10px rgba(0,0,0,0.4);
+    border-color: #fff !important;
+}
+
+canvas { 
+    background: #fdf5e6; 
+    border: 3px solid #3e2723; 
+    border-radius: 8px;
+    cursor: crosshair; 
+    max-width: 100%;
+}
+
+@keyframes clangShake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    20% { transform: translate(-3px, 0px) rotate(-1deg); }
+    40% { transform: translate(3px, 2px) rotate(1deg); }
+    60% { transform: translate(-1px, -1px) rotate(1deg); }
+    80% { transform: translate(-1px, -2px) rotate(-1deg); }
+    100% { transform: translate(0px, 0px) rotate(0deg); }
+}
+
+.anvil-strike {
+    animation: clangShake 0.2s;
+}
+
+.mosaic-tile:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+    z-index: 10;
+}
+
+#mosaic-status {
+    animation: glowText 2s infinite alternate;
+}
+
+@keyframes glowText {
+    from { text-shadow: 0 0 5px gold; }
+    to { text-shadow: 0 0 20px gold, 0 0 30px white; }
+}
+
+#telegraph-input {
+    background-color: #f4ece1;
+    color: #2c1e16;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#telegraph-input:focus {
+    border-color: #8d6e63 !important;
+    background-color: #fffcf9;
+}
+
+#cinema-fact {
+    border: 1px solid #8d6e63;
+    background-color: #fff9f0;
+    color: #3e2723;
+    box-shadow: 3px 3px 0px #8d6e63;
+    line-height: 1.4;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.disco-subtext { color: #bbb; margin-bottom: 30px; font-style: italic; }
+
+#disco-floor {
+    display: grid; 
+    grid-template-columns: repeat(2, 80px); 
+    gap: 12px; 
+    justify-content: center; 
+    margin: 20px auto;
+}
+
+#disco-msg, #disco-score { color: white; font-weight: bold; margin: 10px 0; }
+
+.tile {
+    height: 80px; 
+    width: 80px; 
+    border-radius: 10px; 
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.2s;
+    border: 2px solid rgba(255,255,255,0.1);
+}
+
+.button-row { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
+.exit-btn { background: #444 !important; color: white !important; }
+
+.tile:active {
+    transform: scale(0.9);
+}
+
+/* Background animation for 1970s page */
+.the-1970 .card {
+    background: rgba(0, 0, 0, 0.85);
+    border: 5px solid #ff00ff;
+    box-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff;
+}
+
+.the-1970 .game-area h3 {
+    display: none !important;
+}
+
+/* Optional: This also cleans up the extra name/description tags if they are leaving empty space */
+.the-1970 h1, .the-1970 p:first-of-type {
+    display: none !important;
+}
+
+.disco-container {
+    margin-top: -20px;
+}
+
+/* Disco Ball Container */
+#disco-ball-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* The Ball Itself */
+.disco-ball {
+    width: 80px;
+    height: 80px;
+    background-color: #ccc;
+    border-radius: 50%;
+    /* Create a tiled "mirror" effect using repeating gradients */
+    background-image: 
+        linear-gradient(90deg, rgba(255,255,255,.5) 50%, transparent 50%),
+        linear-gradient(rgba(255,255,255,.5) 50%, transparent 50%);
+    background-size: 10px 10px;
+    box-shadow: 
+        inset 0 0 20px rgba(0,0,0,0.5),
+        0 0 20px rgba(255,255,255,0.4);
+    animation: rotateBall 4s linear infinite, colorPulse 2s linear infinite;
+}
+
+/* Rotation Animation */
+@keyframes rotateBall {
+    0% { background-position: 0 0; transform: rotate(0deg); }
+    100% { background-position: 40px 40px; transform: rotate(360deg); }
+}
+
+/* Flashing Light Effect on the Ball */
+@keyframes colorPulse {
+    0% { box-shadow: 0 0 10px #ff00ff; }
+    33% { box-shadow: 0 0 10px #00ffff; }
+    66% { box-shadow: 0 0 10px #ffff00; }
+    100% { box-shadow: 0 0 10px #ff00ff; }
+}
+
+.the-1970 .game-area { background: transparent !important; border: none !important; box-shadow: none !important; }
+
+.disco-headline {
+    font-family: 'Lobster', cursive;
+    font-size: 4.5rem;
+    color: #ff00ff;
+    text-shadow: 3px 3px 0px #00ffff, 5px 5px 0px #ffea00;
+    margin-bottom: 5px;
+}
+
+#disco-intro p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 80% ;
+    margin: 0 auto 25px auto;
+}
+
+@keyframes pulseBorder {
+    from { border-color: #ff00ff; }
+    to { border-color: #00ffff; }
+}
+progress { width: 100%; height: 25px; }
+
+/* Special Styling for the Random Button */
+.random-btn {
+    background: linear-gradient(135deg, #4a148c, #00acc1) !important;
+    color: white !important;
+    border: none !important;
+    padding: 18px 35px !important;
+    font-size: 1rem !important;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 50px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3), 0 0 20px rgba(74, 20, 140, 0.4);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.random-btn:hover {
+    transform: scale(1.08) translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4), 0 0 30px rgba(0, 172, 193, 0.6);
+    filter: brightness(1.2);
+}
+
+/* Floating animation for the hourglass emoji */
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(10deg); }
+}
